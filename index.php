@@ -88,7 +88,15 @@ $ratingFilter = $_GET["ratingFilter"] ?? "";
                         if ($key === "name") {
                             echo "<th scope='row'>$item</th>";
                         } else {
-                            echo "<td>$item</td>";
+                            if ($key === "parking") {
+                                if ($item == true) {
+                                    echo "<td>Si</td>";
+                                } else {
+                                    echo "<td>No</td>";
+                                }
+                            } else {
+                                echo "<td>$item</td>";
+                            }
                         }
                     }
                     echo "</tr>";
@@ -100,7 +108,15 @@ $ratingFilter = $_GET["ratingFilter"] ?? "";
                                 if ($key === "name") {
                                     echo "<th scope='row'>$item</th>";
                                 } else {
-                                    echo "<td>$item</td>";
+                                    if ($key === "parking") {
+                                        if ($item == true) {
+                                            echo "<td>Si</td>";
+                                        } else {
+                                            echo "<td>No</td>";
+                                        }
+                                    } else {
+                                        echo "<td>$item</td>";
+                                    }
                                 }
                             }
                             echo "</tr>";
@@ -113,7 +129,15 @@ $ratingFilter = $_GET["ratingFilter"] ?? "";
                                     if ($key === "name") {
                                         echo "<th scope='row'>$item</th>";
                                     } else {
-                                        echo "<td>$item</td>";
+                                        if ($key === "parking") {
+                                            if ($item == true) {
+                                                echo "<td>Si</td>";
+                                            } else {
+                                                echo "<td>No</td>";
+                                            }
+                                        } else {
+                                            echo "<td>$item</td>";
+                                        }
                                     }
                                 }
                                 echo "</tr>";
@@ -125,7 +149,15 @@ $ratingFilter = $_GET["ratingFilter"] ?? "";
                                     if ($key === "name") {
                                         echo "<th scope='row'>$item</th>";
                                     } else {
-                                        echo "<td>$item</td>";
+                                        if ($key === "parking") {
+                                            if ($item == true) {
+                                                echo "<td>Si</td>";
+                                            } else {
+                                                echo "<td>No</td>";
+                                            }
+                                        } else {
+                                            echo "<td>$item</td>";
+                                        }
                                     }
                                 }
                                 echo "</tr>";
