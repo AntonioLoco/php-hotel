@@ -37,12 +37,8 @@ $hotels = [
     ],
 ];
 
-// foreach ($hotels as $hotel) {
-//     foreach ($hotel as $key => $item) {
-//         echo "$key - $item <br/>";
-//     };
-// };
-
+$parkingFilter = $_GET["parkingFilter"] ?? "";
+$ratingFilter = $_GET["ratingFilter"] ?? "";
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +53,24 @@ $hotels = [
 </head>
 
 <body>
+    <form action="index.php" method="GET">
+        <label for="parking-filter">Filtra per Parcheggi</label>
+        <select name="parkingFilter" id="parking-filter">
+            <option value="">Entrambi</option>
+            <option value="1">Si</option>
+            <option value="0">No</option>
+        </select>
+        <label for="rating-filter">Filtra per Voto</label>
+        <select name="ratingFilter" id="rating-filter">
+            <option value=""></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <button type="submit">Filtra</button>
+    </form>
     <table class="table">
         <thead>
             <tr>
@@ -66,25 +80,61 @@ $hotels = [
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($hotels as $hotel) { ?>
-                <tr>
-                    <?php foreach ($hotel as $key => $item) { ?>
-                        <?php if ($key === "name") { ?>
-                            <th scope="row"><?php echo $item; ?></th>
-                        <?php } else { ?>
-                            <?php if ($key === "parking") { ?>
-                                <?php if ($item === true) { ?>
-                                    <td>Si</td>
-                                <?php } else { ?>
-                                    <td>No</td>
-                                <?php } ?>
-                            <?php } else { ?>
-                                <td><?php echo $item; ?></td>
-                            <?php } ?>
-                        <?php } ?>
-                    <?php } ?>
-                </tr>
-            <?php } ?>
+            <?php
+            foreach ($hotels as $hotel) {
+                if ($parkingFilter === "" && $ratingFilter === "") {
+                    echo "<tr>";
+                    foreach ($hotel as $key => $item) {
+                        if ($key === "name") {
+                            echo "<th scope='row'>$item</th>";
+                        } else {
+                            echo "<td>$item</td>";
+                        }
+                    }
+                    echo "</tr>";
+                } else {
+                    if ($parkingFilter != "" && $ratingFilter != "") {
+                        if ($hotel['parking'] == $parkingFilter && $hotel['vote'] == $ratingFilter) {
+                            echo "<tr>";
+                            foreach ($hotel as $key => $item) {
+                                if ($key === "name") {
+                                    echo "<th scope='row'>$item</th>";
+                                } else {
+                                    echo "<td>$item</td>";
+                                }
+                            }
+                            echo "</tr>";
+                        }
+                    } else {
+                        if ($parkingFilter === "") {
+                            if ($ratingFilter == $hotel['vote']) {
+                                echo "<tr>";
+                                foreach ($hotel as $key => $item) {
+                                    if ($key === "name") {
+                                        echo "<th scope='row'>$item</th>";
+                                    } else {
+                                        echo "<td>$item</td>";
+                                    }
+                                }
+                                echo "</tr>";
+                            }
+                        } else {
+                            if ($parkingFilter == $hotel['parking']) {
+                                echo "<tr>";
+                                foreach ($hotel as $key => $item) {
+                                    if ($key === "name") {
+                                        echo "<th scope='row'>$item</th>";
+                                    } else {
+                                        echo "<td>$item</td>";
+                                    }
+                                }
+                                echo "</tr>";
+                            }
+                        }
+                    }
+                }
+            }
+            ?>
         </tbody>
     </table>
 </body>
